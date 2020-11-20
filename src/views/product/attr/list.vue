@@ -40,18 +40,19 @@
                 @click="showUpdateDiv(row)"
               ></HintButton>
 
-              <el-popconfirm
+              <!-- <el-popconfirm
                 :title="`你确定是删除${row.attrName}吗`"
                 @onConfirm="deleteAttr(row)"
-              >
+              > -->
                 <HintButton
                   slot="reference"
                   type="danger"
                   icon="el-icon-delete"
                   title="删除属性"
                   size="mini"
+                  @click="deleteAttr(row)"
                 ></HintButton>
-              </el-popconfirm>
+              <!-- </el-popconfirm> -->
             </template>
           </el-table-column>
         </el-table>

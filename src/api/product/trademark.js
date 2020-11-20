@@ -27,6 +27,12 @@ export default {
   // 分页列表
   getPageList(page,limit){
     return request.get(`/admin/product/baseTrademark/${page}/${limit}`)
+  },
+
+  ///admin/product/baseTrademark/getTrademarkList  
+  //get
+  getList(){
+    return request.get('/admin/product/baseTrademark/getTrademarkList')
   }
 
 }

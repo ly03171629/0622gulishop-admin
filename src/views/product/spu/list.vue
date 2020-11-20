@@ -63,10 +63,13 @@
         >
         </el-pagination>
       </div>
-
-      <SpuForm v-show="isShowSpuForm"></SpuForm>
+      <!-- 不合适 -->
+      <!-- <SpuForm v-show="isShowSpuForm"  v-model="isShowSpuForm"></SpuForm> -->
+      <!-- <SpuForm v-show="isShowSpuForm" :value="isShowSpuForm" @input="isShowSpuForm = $event"></SpuForm> -->
+      <!-- 合适 -->
+      <SpuForm v-show="isShowSpuForm"  :visible.sync="isShowSpuForm" ref="spuForm"></SpuForm>
+      <!-- <SpuForm v-show="isShowSpuForm" :visible="isShowSpuForm" @update:visible="isShowSpuForm = $event"></SpuForm> -->
       <SkuForm v-show="isShowSkuForm"></SkuForm>
-
     </el-card>
   </div>
 </template>
@@ -142,10 +145,12 @@ export default {
     //点击添加Spu按钮
     showAddSpuForm(){
       this.isShowSpuForm = true
+      this.$refs.spuForm.initAddSpuFormData()
     },
     //点击修改Spu按钮
     showUpdateSpuForm(row){
       this.isShowSpuForm = true
+      this.$refs.spuForm.initUpdateSpuFormData(row)
     },
     //点击添加Sku按钮
     showAddSkuForm(row){
