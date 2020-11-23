@@ -37,6 +37,9 @@
             :key="attr.id"
           >
             <!-- 用户选择select的时候，我们顺便把属性的id及选中的属性值的id 拼接 收集起来，放在当前选择的这个属性身上 -->
+            <!-- select和option 通常勾搭在一起
+            最终select收集数据  select收集数据收集的是选中的option的value值
+            -->
             <el-select v-model="attr.attrIdValueId" placeholder="请输入">
               <el-option
                 :label="attrValue.valueName"
@@ -127,7 +130,6 @@ export default {
       //捏造的不知道对不对
       // attrValueId: "",
       // spuSaleAttrValueId:"",
-
       skuForm: {
         //父组件传递过来的
         spuId: 0,
@@ -169,6 +171,7 @@ export default {
       attrList: [],
       spuSaleAttrList: [],
       spuImageList: [], //是初始化数据为了展示用的
+
       skuCheckedImageList: [], //为了选中图片组成数组 后期发请求使用的
     };
   },
@@ -328,6 +331,8 @@ export default {
       let promise2 = this.$API.sku.getSpuSaleAttrList(row.id);
       //http://localhost:9529/dev-api/admin/product/spuImageList/1867
       let promise3 = this.$API.sku.getSpuImageList(row.id);
+
+
       const result = await Promise.all([promise1, promise2, promise3]);
       console.log(result);
       this.attrList = result[0].data;

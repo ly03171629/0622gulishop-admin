@@ -10,7 +10,7 @@
     <el-card style="margin-top: 20px">
       <!-- 列表相关 -->
       <div v-show="!isShowSpuForm && !isShowSkuForm">
-        <el-button type="primary" icon="el-icon-plus" @click="showAddSpuForm"
+        <el-button type="primary" icon="el-icon-plus" @click="showAddSpuForm" :disabled="!category3Id"
           >添加SPU</el-button
         >
         <el-table :data="spuList" border style="width: 100%">
@@ -83,8 +83,9 @@
       <el-dialog
         :title="`${spu.spuName}的sku列表`"
         :visible.sync="dialogTableVisible"
+        :before-close="handlerCloseDialog"
       >
-        <el-table border :data="skuList">
+        <el-table border :data="skuList" v-loading="isLoading">
           <el-table-column
             property="skuName"
             label="名称"
@@ -127,6 +128,7 @@ export default {
   data() {
     return {
       isShowList: true, //控制三级分类可操作性的数据
+
       category1Id: "",
       category2Id: "",
       category3Id: "",
@@ -143,19 +145,41 @@ export default {
       dialogTableVisible: false,
       spu: {},
       skuList: [],
+
+      isLoading:false  //用于使用正在加载功能的逻辑
     };
   },
+
+  //通过监视实现三级分类的可操作行
+  watch:{
+    isShowSpuForm:{
+      handler(newVal){
+        this.isShowList = !newVal
+      }
+    },
+    isShowSkuForm(newVal){
+      this.isShowList = !newVal
+    }
+  },
   methods: {
+    //当关闭dialog的时候之前会调用这个回调
+    handlerCloseDialog(){
+      this.skuList = []
+      this.dialogTableVisible = false
+    },
+
     //点击查看spu的所有sku
     async showSkuDialog(row) {
       this.dialogTableVisible = true;
       this.spu = row;
+      this.isLoading = true
       //发请求获取row的所有sku
       const result = await this.$API.sku.getListBySpuId(row.id);
       if (result.code === 200) {
         console.log(111);
         this.skuList = result.data;
       }
+      this.isLoading = false
     },
 
     //子组件保存成功返回的事件回调

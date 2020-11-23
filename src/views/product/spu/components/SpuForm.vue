@@ -60,7 +60,7 @@
           >
           </el-option>
         </el-select>
-        <el-button type="primary" icon="el-icon-plus" @click="addSaleAttr"
+        <el-button type="primary" icon="el-icon-plus" @click="addSaleAttr" :disabled="!saleAttrIdName"
           >添加销售属性</el-button
         >
         <el-table
@@ -124,7 +124,7 @@
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" @click="save">保存</el-button>
+        <el-button type="primary" @click="save" :disabled="!spuForm.spuName">保存</el-button>
         <el-button @click="cancelBack">取消</el-button>
         <!-- <el-button @click="$emit('input',false)">取消</el-button> -->
       </el-form-item>
@@ -288,6 +288,7 @@ export default {
           this.$emit('update:visible',false)
           //通知父组件回来了
           this.$emit('successBack')
+
         }else{
           this.$message.error('保存失败')
         }
