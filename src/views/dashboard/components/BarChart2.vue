@@ -8,6 +8,7 @@
     mixins: [resize],
 
     data () {
+      //固定写法
       this.chartSettings = {
         axisSite: { right: ['下单率'] },
         yAxisType: ['KMB', 'percent'],

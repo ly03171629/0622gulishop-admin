@@ -80,6 +80,10 @@ export const lastRoute = {
   hidden: true 
 }
 
+
+// 路由当中最终有三块：常量路由    last路由404
+//last 路由必须放在路由数组当中的最后一个
+
 /* 
 用于创建只注册常量路由的路由器的函数
 */

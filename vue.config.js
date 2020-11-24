@@ -70,7 +70,7 @@ module.exports = {
       .rule('svg')
       .exclude.add(resolve('src/icons'))
       .end()
-    config.module
+    config.module  //根据svg传递的名称找到对应的位置获取对应的svg图
       .rule('icons')
       .test(/\.svg$/)
       .include.add(resolve('src/icons'))

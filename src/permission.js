@@ -39,8 +39,13 @@ router.beforeEach(async(to, from, next) => {
         try {
           // 异步请求获取用户信息
           await store.dispatch('user/getInfo')
+
           // 成功后, 请求获取当前用户的所有权限路由数组
           const asyncRoutes = await store.dispatch('permission/generateRoutes')
+
+          //以上主要是根据获取到的用户信息（包含用户名、用户的头像、用户角色、用户的按钮权限）
+          //动态的去生成真正的异步路由
+
           // 动态添加可访问的路由, 注意将lastRoute放在最后
           // router.addRoutes(asyncRoutes.concat(lastRoute))
           router.addRoutes([...asyncRoutes, lastRoute])

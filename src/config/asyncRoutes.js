@@ -10,8 +10,19 @@ const Order = () => import('@/views/order/list')
 const Login = () => import('@/views/login/index')
 const ClientUser = () => import('@/views/user/index')
 const Category = () => import('@/views/category/list')
+const Test = () => import('@/views/test/list')
+const Test2 = () => import('@/views/test/test')
 
 export default {
+  Test2:{
+    path:'test/test',
+    component:Test2
+  },
+  Test:{
+    path:'test/list',
+    component:Test
+  },
+
   User: {
     component: User,
     path: 'user/list'
